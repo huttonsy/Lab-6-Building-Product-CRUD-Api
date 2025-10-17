@@ -1,4 +1,4 @@
-package com.elkabani.firstspringboot;
+package com.huttonsy.firstspringboot;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;

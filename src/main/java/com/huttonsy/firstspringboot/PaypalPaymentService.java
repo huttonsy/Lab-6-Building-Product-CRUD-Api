@@ -1,4 +1,4 @@
-package com.elkabani.firstspringboot;
+package com.huttonsy.firstspringboot;
 
 import org.springframework.stereotype.Service;
 

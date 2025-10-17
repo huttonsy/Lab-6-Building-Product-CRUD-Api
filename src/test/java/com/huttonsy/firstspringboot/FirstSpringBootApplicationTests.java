@@ -1,4 +1,4 @@
-package com.elkabani.firstspringboot;
+package com.huttonsy.firstspringboot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
