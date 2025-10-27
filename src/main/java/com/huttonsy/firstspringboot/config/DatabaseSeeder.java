@@ -18,20 +18,26 @@ public class DatabaseSeeder {
         return args -> {
 
             System.out.println("\n--- 1️⃣ Create product with a NEW category ---");
-            Category gadgets = categoryRepo.findByName("Gadgets")
+            Category gadgets = categoryRepo.findFirstByName("Gadgets")
                     .orElseGet(() -> categoryRepo.save(new Category("Gadgets")));
 
-            Product tablet = new Product("Tablet", new BigDecimal("199.99"), gadgets);
-            productRepo.save(tablet);
-            System.out.println("✅ Created product 'Tablet' with new category 'Gadgets'");
+            productRepo.findByName("Tablet").orElseGet(() -> {
+                Product tablet = new Product("Tablet", "A nice tablet", new BigDecimal("199.99"), gadgets);
+                Product saved = productRepo.save(tablet);
+                System.out.println("✅ Created product 'Tablet' with new category 'Gadgets'");
+                return saved;
+            });
 
             System.out.println("\n--- 2️⃣ Create product for an EXISTING category ---");
-            Category electronics = categoryRepo.findByName("Electronics")
+            Category electronics = categoryRepo.findFirstByName("Electronics")
                     .orElseGet(() -> categoryRepo.save(new Category("Electronics")));
 
-            Product headphones = new Product("Headphones", new BigDecimal("89.99"), electronics);
-            productRepo.save(headphones);
-            System.out.println("✅ Added product 'Headphones' to existing category 'Electronics'");
+            productRepo.findByName("Headphones").orElseGet(() -> {
+                Product headphones = new Product("Headphones", "Bluetooth", new BigDecimal("89.99"), electronics);
+                Product saved = productRepo.save(headphones);
+                System.out.println("✅ Added product 'Headphones' to existing category 'Electronics'");
+                return saved;
+            });
 
             System.out.println("\n--- 3️⃣ Delete a product ---");
             productRepo.findByName("Headphones").ifPresent(product -> {
